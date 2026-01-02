@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field>
+            <name>verifyEmail</name>
+            <label>email address to be used for the validator</label>
+            <label lang="de-DE">E-Mail-Adresse für die Validierung </label>
+            <defaultValue>verify@example.com</defaultValue>
+            <helpText>This is important to be a valid mail domain. Otherwise, some checks will be false-positive.</helpText>
+            <helpText lang="de-DE">Es ist wichtig, dass es sich um eine gültige E-Mail-Domain handelt. Andernfalls liefern einige Prüfungen falsch-positive Ergebnisse.</helpText>
+        </input-field>
+    </card>
+</config>

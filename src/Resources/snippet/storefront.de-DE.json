@@ -1,0 +1,5 @@
+{
+    "error": {
+        "VIOLATION::EMAIL_NOT_VALID": "Wir konnten das Postfach scheinar nicht erreichen. Bitte überprüfen Sie Ihre E-Mail-Adresse noch einmal auf mögliche Eingabefehler."
+    }
+}

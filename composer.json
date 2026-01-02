@@ -1,0 +1,48 @@
+{
+    "name": "frosh/mail-validation",
+    "description": "Some plugin description",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "FriendsOfShopware"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.7",
+        "shyim/check-if-email-exists": "^1.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Frosh\\MailValidation\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Frosh\\MailValidation\\FroshMailValidation",
+        "copyright": "FriendsOfShopware",
+        "label": {
+            "de-DE": "MailValidation",
+            "en-GB": "MailValidation"
+        },
+        "description": {
+            "de-DE": "Some plugin description",
+            "en-GB": "Some plugin description"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://acme.org",
+            "en-GB": "https://acme.org"
+        },
+        "supportLink": {
+            "de-DE": "https://acme.org",
+            "en-GB": "https://acme.org"
+        }
+    },
+    "scripts": {
+        "check": [
+            "docker run --rm -v $(pwd):/ext shopware/shopware-cli:latest extension validate --check-against lowest --full /ext",
+            "docker run --rm -v $(pwd):/ext shopware/shopware-cli:latest extension validate --check-against highest --full /ext"
+        ],
+        "format": "docker run --rm -v $(pwd):/ext shopware/shopware-cli:latest extension format /ext"
+    }
+}

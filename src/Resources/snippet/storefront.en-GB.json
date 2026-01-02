@@ -1,0 +1,5 @@
+{
+    "error": {
+        "VIOLATION::EMAIL_NOT_VALID": "We apparently couldn't reach the mailbox. Please double-check your given email address for any input errors."
+    }
+}
