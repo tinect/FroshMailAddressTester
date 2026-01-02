@@ -1,6 +1,6 @@
 {
     "name": "frosh/mail-validation",
-    "description": "Some plugin description",
+    "description": "Validates email addresses by checking their actual existence on the target mail server. Reduces bounces, fake addresses, and sustainably improves deliverability.",
     "type": "shopware-platform-plugin",
     "version": "1.0.0",
     "authors": [
@@ -22,20 +22,20 @@
         "shopware-plugin-class": "Frosh\\MailValidation\\FroshMailValidation",
         "copyright": "FriendsOfShopware",
         "label": {
-            "de-DE": "MailValidation",
-            "en-GB": "MailValidation"
+            "de-DE": "E-Mail-Validierung durch Überprüfung der Existenz",
+            "en-GB": "MailValidation by checking existence"
         },
         "description": {
-            "de-DE": "Some plugin description",
-            "en-GB": "Some plugin description"
+            "de-DE": "Validiert E-Mail-Adressen durch Prüfung der tatsächlichen Existenz beim Zielserver. Reduziert Bounces, Fake-Adressen und verbessert nachhaltig die Zustellbarkeit.",
+            "en-GB": "Validates email addresses by checking their actual existence on the target mail server. Reduces bounces, fake addresses, and sustainably improves deliverability."
         },
         "manufacturerLink": {
-            "de-DE": "https://acme.org",
-            "en-GB": "https://acme.org"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshMailValidation/",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshMailValidation/"
         },
         "supportLink": {
-            "de-DE": "https://acme.org",
-            "en-GB": "https://acme.org"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshMailValidation/",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshMailValidation/"
         }
     },
     "scripts": {
