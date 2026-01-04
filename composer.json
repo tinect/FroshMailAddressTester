@@ -1,5 +1,5 @@
 {
-    "name": "frosh/mail-validation",
+    "name": "frosh/mail-address-tester",
     "description": "Validates email addresses by checking their actual existence on the target mail server. Reduces bounces, fake addresses, and sustainably improves deliverability.",
     "type": "shopware-platform-plugin",
     "version": "1.0.0",
@@ -10,32 +10,32 @@
     ],
     "require": {
         "shopware/core": "~6.7",
-        "shyim/check-if-email-exists": "^1.0"
+        "shyim/check-if-email-exists": "^1.0.2"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Frosh\\MailValidation\\": "src/"
+            "Frosh\\MailAddressTester\\": "src/"
         }
     },
     "extra": {
-        "shopware-plugin-class": "Frosh\\MailValidation\\FroshMailValidation",
+        "shopware-plugin-class": "Frosh\\MailAddressTester\\FroshMailAddressTester",
         "copyright": "FriendsOfShopware",
         "label": {
-            "de-DE": "E-Mail-Validierung durch Überprüfung der Existenz",
-            "en-GB": "MailValidation by checking existence"
+            "de-DE": "E-Mail-Adressen-Tester",
+            "en-GB": "Mail address tester"
         },
         "description": {
             "de-DE": "Validiert E-Mail-Adressen durch Prüfung der tatsächlichen Existenz beim Zielserver. Reduziert Bounces, Fake-Adressen und verbessert nachhaltig die Zustellbarkeit.",
             "en-GB": "Validates email addresses by checking their actual existence on the target mail server. Reduces bounces, fake addresses, and sustainably improves deliverability."
         },
         "manufacturerLink": {
-            "de-DE": "https://github.com/FriendsOfShopware/FroshMailValidation/",
-            "en-GB": "https://github.com/FriendsOfShopware/FroshMailValidation/"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshMailAddressTester/",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshMailAddressTester/"
         },
         "supportLink": {
-            "de-DE": "https://github.com/FriendsOfShopware/FroshMailValidation/",
-            "en-GB": "https://github.com/FriendsOfShopware/FroshMailValidation/"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshMailAddressTester/",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshMailAddressTester/"
         }
     },
     "scripts": {

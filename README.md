@@ -1,24 +1,24 @@
-# FroshMailValidation
+# FroshMailAddressTester
 
-This plugin for Shopware 6 validates email addresses during customer registration and checkout processes to ensure the mailbox is accessible and potentially valid.
+This plugin for Shopware 6 tests email address during customer registration and checkout processes to ensure the mailbox is accessible and potentially valid.
 
 ## Installation
 
 ### Via Composer
 
 ```bash
-composer require frosh/mail-validation
+composer require frosh/mail-address-tester
 ```
 
 ```bash
 bin/console plugin:refresh
-bin/console plugin:install --activate FroshMailValidation
+bin/console plugin:install --activate FroshMailAddressTester
 bin/console cache:clear
 ```
 
 ## Support
 
-- **GitHub Issues**: [https://github.com/FriendsOfShopware/FroshMailValidation/issues](https://github.com/FriendsOfShopware/FroshMailValidation/issues)
+- **GitHub Issues**: [https://github.com/FriendsOfShopware/FroshMailAddressTester/issues](https://github.com/FriendsOfShopware/FroshMailAddressTester/issues)
 
 ## License
 
