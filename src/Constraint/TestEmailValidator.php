@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Frosh\MailValidation\Constraint;
+namespace Frosh\MailAddressTester\Constraint;
 
-use Frosh\MailValidation\Service\Validator;
+use Frosh\MailAddressTester\Service\Tester;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-#[AutoconfigureTag('monolog.logger', ['channel' => 'frosh-mail-validation'])]
+#[AutoconfigureTag('monolog.logger', ['channel' => 'frosh-mail-address-tester'])]
 #[AutoconfigureTag(name: 'validator.constraint_validator')]
 class TestEmailValidator extends ConstraintValidator
 {
     public function __construct(
-        private readonly Validator $emailValidator,
+        private readonly Tester $emailAddressTester,
     ) {
     }
 
@@ -26,7 +26,7 @@ class TestEmailValidator extends ConstraintValidator
             return;
         }
 
-        if ($this->emailValidator->validateEmail($value)) {
+        if ($this->emailAddressTester->validateEmail($value)) {
             return;
         }
 

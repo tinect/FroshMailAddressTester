@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Frosh\MailValidation\Constraint;
+namespace Frosh\MailAddressTester\Constraint;
 
 use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;

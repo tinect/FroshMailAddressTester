@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Frosh\MailValidation\Subscriber;
+namespace Frosh\MailAddressTester\Subscriber;
 
-use Frosh\MailValidation\Constraint\TestEmail;
+use Frosh\MailAddressTester\Constraint\TestEmail;
 use Shopware\Core\Framework\Validation\BuildValidationEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
