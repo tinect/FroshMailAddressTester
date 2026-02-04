@@ -1,0 +1,10 @@
+monolog:
+    channels: ['frosh_mail_tester']
+
+    handlers:
+        FroshMailTesterHandler:
+            type: rotating_file
+            max_files: 14
+            path: '%kernel.logs_dir%/frosh_mail_tester_%kernel.environment%.log'
+            level: error
+            channels: ['frosh_mail_tester']
