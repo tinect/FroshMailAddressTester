@@ -32,12 +32,12 @@ class Tester
             return $mailValidCacheResult;
         }
 
-        $syntaxCheck = new Syntax($email);
-        if ($syntaxCheck->isValid() === false) {
+        $syntaxResult = new Syntax($email);
+        if ($syntaxResult->isValid() === false) {
             return false;
         }
 
-        $domain = $syntaxCheck->domain;
+        $domain = $syntaxResult->domain;
 
         $domainValidCache = $this->getCacheItem($domain);
         // first check if the domain is already marked as invalid
@@ -56,24 +56,29 @@ class Tester
         }
 
         $verifyEmail = $this->systemConfigService->getString('FroshMailAddressTester.config.verifyEmail');
+        if ($verifyEmail !== '') {
+            $smtpCheck = new SMTP($verifyEmail);
+        } else {
+            $smtpCheck = new SMTP();
+        }
 
-        $smtpCheck = (new SMTP($verifyEmail))->check($domain, $mxRecords, $email);
-        $this->saveCache($domainValidCache, $smtpCheck->canConnect);
+        $smtpResult = $smtpCheck->check($domain, $mxRecords, $email);
+        $this->saveCache($domainValidCache, $smtpResult->canConnect);
 
-        if ($smtpCheck->canConnect === false) {
-            $this->froshMailAddressTesterLogger->error($smtpCheck->error);
+        if ($smtpResult->canConnect === false) {
+            $this->froshMailAddressTesterLogger->error($smtpResult->error);
 
             return false;
         }
 
-        $isValid = $smtpCheck->isDeliverable === true && $smtpCheck->isDisabled === false && $smtpCheck->hasFullInbox === false;
+        $isValid = $smtpResult->isDeliverable === true && $smtpResult->isDisabled === false && $smtpResult->hasFullInbox === false;
 
         $this->saveCache($mailValidCache, $isValid);
 
         if ($isValid === false) {
             $this->froshMailAddressTesterLogger->error(
                 \sprintf('Email address "%s" test failed', $email),
-                json_decode(json_encode($smtpCheck, \JSON_THROW_ON_ERROR), true, 1, \JSON_THROW_ON_ERROR)
+                json_decode(json_encode($smtpResult, \JSON_THROW_ON_ERROR), true, 1, \JSON_THROW_ON_ERROR)
             );
         }
 
