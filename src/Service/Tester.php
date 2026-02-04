@@ -2,6 +2,7 @@
 
 namespace Frosh\MailAddressTester\Service;
 
+use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 use Shopware\Core\Framework\Util\Hasher;
@@ -25,15 +26,11 @@ class Tester
     {
         $email = \strtolower($email);
 
-        $emailCacheKey = 'frosh_mail_validation_email_' . Hasher::hash($email);
-        $mailValidCache = $this->cache->getItem($emailCacheKey);
-
+        $mailValidCache = $this->getCacheItem($email);
         $mailValidCacheResult = $mailValidCache->get();
         if (\is_bool($mailValidCacheResult)) {
             return $mailValidCacheResult;
         }
-
-        $mailValidCache->expiresAfter(3600);
 
         $syntaxCheck = new Syntax($email);
         if ($syntaxCheck->isValid() === false) {
@@ -42,22 +39,16 @@ class Tester
 
         $domain = $syntaxCheck->domain;
 
-        $domainCacheKey = 'frosh_mail_validation_domain_' . Hasher::hash($domain);
-
-        $domainValidCache = $this->cache->getItem($domainCacheKey);
-
+        $domainValidCache = $this->getCacheItem($domain);
         // first check if the domain is already marked as invalid
         if ($domainValidCache->get() === false) {
             return false;
         }
 
-        $domainValidCache->expiresAfter(3600);
-
         $mxRecords = (new DNS())->getMxRecords($domain);
 
         if (empty($mxRecords)) {
-            $domainValidCache->set(false);
-            $this->cache->save($domainValidCache);
+            $this->saveCache($domainValidCache, false);
 
             $this->froshMailAddressTesterLogger->error(\sprintf('Domain %s has no mx records', $domain));
 
@@ -67,23 +58,17 @@ class Tester
         $verifyEmail = $this->systemConfigService->getString('FroshMailAddressTester.config.verifyEmail');
 
         $smtpCheck = (new SMTP($verifyEmail))->check($domain, $mxRecords, $email);
-        if ($smtpCheck->canConnect === false) {
-            $domainValidCache->set(false);
-            $this->cache->save($domainValidCache);
+        $this->saveCache($domainValidCache, $smtpCheck->canConnect);
 
+        if ($smtpCheck->canConnect === false) {
             $this->froshMailAddressTesterLogger->error($smtpCheck->error);
 
             return false;
         }
 
-        $domainValidCache->expiresAfter(86400);
-        $domainValidCache->set(true);
-        $this->cache->save($domainValidCache);
-
         $isValid = $smtpCheck->isDeliverable === true && $smtpCheck->isDisabled === false && $smtpCheck->hasFullInbox === false;
 
-        $mailValidCache->set($isValid);
-        $this->cache->save($mailValidCache);
+        $this->saveCache($mailValidCache, $isValid);
 
         if ($isValid === false) {
             $this->froshMailAddressTesterLogger->error(
@@ -93,5 +78,25 @@ class Tester
         }
 
         return $isValid;
+    }
+
+    private function getCacheItem(string $value): CacheItemInterface
+    {
+        $cacheKey = 'frosh_mail_tester_' . Hasher::hash($value);
+
+        return $this->cache->getItem($cacheKey);
+    }
+
+    private function saveCache(CacheItemInterface $item, bool $value): void
+    {
+        $cacheTime = 3600;
+
+        if ($value === true) {
+            $cacheTime = 86400; // one day for valid emails
+        }
+
+        $item->expiresAfter($cacheTime);
+        $item->set($value);
+        $this->cache->save($item);
     }
 }
