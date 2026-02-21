@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "shopware/core": "~6.7",
+        "shopware/core": "~6.6||~6.7",
         "shyim/check-if-email-exists": "^1.0.2"
     },
     "license": "MIT",
