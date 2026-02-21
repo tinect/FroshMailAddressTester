@@ -7,10 +7,8 @@ on:
 
 jobs:
   build:
-    uses: FriendsOfShopware/actions/.github/workflows/store-shopware-cli.yml@main
+    uses: FriendsOfShopware/actions/.github/workflows/github.yml@main
     with:
-      extensionName: FroshMailAddressTester
-    secrets:
-      accountUser: ${{ secrets.ACCOUNT_USER }}
-      accountPassword: ${{ secrets.ACCOUNT_PASSWORD }}
-      ghToken: ${{ secrets.GITHUB_TOKEN }}
+      extensionName: ${{ github.event.repository.name }}
+      shopwareVersion: '6.6.0'
+      cliVersion: '0.11.0'
