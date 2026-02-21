@@ -6,13 +6,42 @@
         <title>Basic Configuration</title>
         <title lang="de-DE">Grundeinstellungen</title>
 
+        <input-field type="single-select">
+            <name>level</name>
+            <label>Level of test</label>
+            <label lang="de-DE">Level des Tests</label>
+            <defaultValue>simple</defaultValue>
+            <helpText><![CDATA[
+                <strong>simple</strong>: just checks if the domain has an announced mail server (MX record)
+                <br/>
+                <strong>SMTP</strong>: checks if an email would be deliverable by connecting to the mail server and simulating a mail delivery without really sending. Diese Prüfung dauert länger. Make sure the email address provided in the next field is valid, otherwise, some checks will be false-negative.
+            ]]></helpText>
+            <helpText lang="de-DE"><![CDATA[
+                <strong>Einfach</strong>: Es wird lediglich geprüft, ob für die Domain ein bekanntgegebener Mailserver (MX-Eintrag) existiert.
+                <br/>
+                <strong>SMTP</strong>: Diese Option prüft die Zustellbarkeit einer E-Mail, indem sie eine Verbindung zum Mailserver herstellt und die Zustellung simuliert, ohne die E-Mail tatsächlich zu senden. Diese Prüfung dauert länger. Stellen Sie sicher, dass die im nächsten Feld angegebene E-Mail-Adresse gültig ist, da es sonst zu Fehlalarmen kommen kann.
+            ]]></helpText>
+            <options>
+                <option>
+                    <id>simple</id>
+                    <name>simple</name>
+                    <name lang="de-DE">einfach</name>
+                </option>
+                <option>
+                    <id>smtp</id>
+                    <name>smtp</name>
+                    <name lang="de-DE">SMTP</name>
+                </option>
+            </options>
+        </input-field>
+
         <input-field>
             <name>verifyEmail</name>
-            <label>email address to be used for the validator</label>
+            <label>email address to be used for the smtp test</label>
             <label lang="de-DE">E-Mail-Adresse für die Validierung </label>
             <defaultValue>verify@example.com</defaultValue>
-            <helpText>This is important to be a valid mail domain. Otherwise, some checks will be false-positive.</helpText>
-            <helpText lang="de-DE">Es ist wichtig, dass es sich um eine gültige E-Mail-Domain handelt. Andernfalls liefern einige Prüfungen falsch-positive Ergebnisse.</helpText>
+            <helpText>This is important to be a valid mail domain. Otherwise, some checks will be false-negative.</helpText>
+            <helpText lang="de-DE">Es ist wichtig, dass es sich um eine gültige E-Mail-Domain handelt. Andernfalls liefern einige Prüfungen falsch-negative Ergebnisse.</helpText>
         </input-field>
     </card>
 </config>

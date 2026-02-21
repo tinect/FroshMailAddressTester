@@ -55,6 +55,10 @@ class Tester
             return false;
         }
 
+        if ($this->systemConfigService->getString('FroshMailAddressTester.config.level') !== 'smtp') {
+            return true;
+        }
+
         $verifyEmail = $this->systemConfigService->getString('FroshMailAddressTester.config.verifyEmail');
         if ($verifyEmail !== '') {
             $smtpCheck = new SMTP($verifyEmail);
