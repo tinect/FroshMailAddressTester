@@ -16,7 +16,6 @@ class Tester
 {
     public function __construct(
         private readonly SystemConfigService $systemConfigService,
-        #[Autowire('cache.app')]
         private readonly CacheItemPoolInterface $cache,
         private readonly LoggerInterface $froshMailAddressTesterLogger,
     ) {
