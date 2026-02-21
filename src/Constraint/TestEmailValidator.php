@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-#[AutoconfigureTag('monolog.logger', ['channel' => 'frosh_mail_tester'])]
 #[AutoconfigureTag(name: 'validator.constraint_validator')]
 class TestEmailValidator extends ConstraintValidator
 {
