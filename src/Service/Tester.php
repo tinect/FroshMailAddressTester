@@ -10,14 +10,13 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shyim\CheckIfEmailExists\DNS;
 use Shyim\CheckIfEmailExists\SMTP;
 use Shyim\CheckIfEmailExists\Syntax;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class Tester
 {
     public function __construct(
         private readonly SystemConfigService $systemConfigService,
         private readonly CacheItemPoolInterface $cache,
-        private readonly LoggerInterface $froshMailAddressTesterLogger,
+        private readonly LoggerInterface $froshMailTesterLogger,
     ) {
     }
 
@@ -49,7 +48,7 @@ class Tester
         if (empty($mxRecords)) {
             $this->saveCache($domainValidCache, false);
 
-            $this->froshMailAddressTesterLogger->error(\sprintf('Domain %s has no mx records', $domain));
+            $this->froshMailTesterLogger->error(\sprintf('Domain %s has no mx records', $domain));
 
             return false;
         }
@@ -69,7 +68,7 @@ class Tester
         $this->saveCache($domainValidCache, $smtpResult->canConnect);
 
         if ($smtpResult->canConnect === false) {
-            $this->froshMailAddressTesterLogger->error($smtpResult->error);
+            $this->froshMailTesterLogger->error($smtpResult->error);
 
             return false;
         }
@@ -79,7 +78,7 @@ class Tester
         $this->saveCache($mailValidCache, $isValid);
 
         if ($isValid === false) {
-            $this->froshMailAddressTesterLogger->error(
+            $this->froshMailTesterLogger->error(
                 \sprintf('Email address "%s" test failed', $email),
                 json_decode(json_encode($smtpResult, \JSON_THROW_ON_ERROR), true, 1, \JSON_THROW_ON_ERROR)
             );
